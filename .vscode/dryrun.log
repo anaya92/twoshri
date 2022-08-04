@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/anaya/Documents/loudmountain'
+gcc -o macchapuchare -lSDL2 -framework OpenGL ./src/main.c ./src/R/renderer.c ./src/Os/screen.c ./src/Os/events.c
+make: Leaving directory `/Users/anaya/Documents/loudmountain'
+ 
