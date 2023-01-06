@@ -1,0 +1,2 @@
+an interesting thing that happens when you use the dlls is that if u call a function in the dll from the dll it causes some crazy lag probably related to how the functions are looked up.
+TODO: find a workout or make sure that doesnt happen

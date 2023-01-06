@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Progress Report #1: Fashionably Late</title>
+        <link rel="stylesheet" href="styles/pr1.css"/>
+        <link rel="icon" type="image/x-icon" href="img/pr1_favicon.png">
+    </head>
+    <body>
+        <div class="main">
+            <h1>Progress Report #1: Fashionably Late</h1>
+            <div class="window">
+                <span id="Intro Section">
+                    Progress has been slow these past few months, but it's progress nonetheless (Sorry for the radio silence, 11th grade really been crazy).
+                    Since this is the first progress report of many, I'll summarize what I've accomplished in the past year and what I plan to do in 2022.
+                    <ul>
+                        Table of Progress :) (CLICK ME!!!! IM INTERACTABLE!!!!)
+                        <li><a href="#ch-tsp">Twoshri Primer!!!</a></li>
+                        <li><a href="#ch-gp">Gamepad/Controller System</a></li>
+                        <li><a href="#ch-r">Renderer Improvements and Dynamic Library Systems</a></li>
+                        <li>Some general demo improvements</li>
+                    </ul>
+                </span>
+                <span id="Twoshri Primer">
+                    <h3 id="ch-tsp"># Twoshri Primer!!!</h3>
+                    Twoshri was a project which began in late summer 2022, while I was still in Nepal. Some small pieces of code still remain from that time, but currently most major sections of code are post-September.
+                    This primer give you a quick run down on the goals of this project. Twoshri is intended to be a 3D game engine (think goldsrc or the stuff that makes any game run). Nothing more, nothing less. The final goal is a complete technical demo of Twoshri and it's features,
+                    and in a couple years a fully fledged game. Of course, that's easier said than done.
+                    Even up to this point, I have already sunk 40ish hours over the entire lifetime of this development cycle. This project drives me to learn graphics APIs, GPU programming, physics, expand my programming horizons and more.
+                    The Twoshri application source, at the moment, is written entirely in C.
+                    <ul>
+                        Good-to-Know Vocabulary:
+                        <li>Graphics API: an API which allows me to access features of the GPU to create 3D graphics</li>
+                        <li>Renderer: software which uses the renderer to draw complex graphics, with lighting and other techniques</li>
+                        <li>"Library": a reusable pack of code. A dynamic library would be which could be loaded while the app is running.</li>
+                    </ul>
+                </span>
+                <span class="warning">WARNING:</span> i will be explaining some things pretty in depth, so if ur really confused let me know and i will try to adjust the next report.<br/>
+                <span id="Gamepad Controller System">
+                    <h3 id="ch-gp"># Gamepad/Controller System</h3>
+                    Easier than implementing a keyboard system, but not *easy*. I completed this subproject around the end of fall and it took me about a week. (fun fact: most of this project's core features were made in &lt; 1-week bursts of work)
+                    <span class="center">
+                        <ul>
+                            features
+                            <li>4 player slots (SYS_PLAYER0-4)</li>
+                            <li>checks for disconnect/reconnect automatically</li>
+                            <li>you can prime a controller handle, and wait for a connection</li>
+                        </ul>
+                        <span class="italicized">
+                            <figure>
+                                <img class="dynamic-scale"src="img/pr1_gpt.PNG"/><br/>
+                                <figcaption>fig 1: look at that beautiful console output: controllers are indeed being properly loaded and unloaded</figcaption>
+                            </figure>
+                        </span>
+                    </span>
+                    At the end of all that, we are left with a fully capable input system which is both robust and was easy to implement. For now Twoshri will remain controller only.
+                </span>
+                <span id="Renderer Section">
+                    <h3 id="ch-r"># Renderer Improvements and Dynamic Library Systems</h3>
+                    The renderer: the crown jewel of this project.<br/><br/>
+                    Over the past couple months the renderer has gone under extensive refactoring and redesign, mostly in planning for future modularity and ease of use, along with the capability to assist me in learning more graphics APIs (Vulkan, DirectX).
+                    Dynamic libraries were the biggest leap this engine has ever seen. Dynamic libraries bring Twoshri to the next level technically (in perspective, this is about where the gaming industry was around the release of Quake 2 in 1997) and bring many possiblilities in the future
+                    such as multithreading, raytracing, and allowing the user to pick their own renderer. Twoshri's design revolves around its renderer, and a solid foundation here will secure this project's success.
+                    Soon enough, the renderer will be capable of renderering complex 3D meshes, along with the core app's ability to load and manage resources.
+                    <h4>How does the dynamic library work?</h4>
+                    The dynamic library is based on the Twoshri renderer headers, which are a set of code definitions for all possible backends. Here's an excerpt!
+                    <br/><img class="center dynamic-scale" src="img/pr1_rexcerpt.PNG"><br/>
+                    At runtime, the application loads a backend for Ts.Renderer from a DLL or other dynamic library (Fig. 3). The Twoshri renderer specification provides a stable base for future renderers to built on, and I change and update the renderer almost every time I boot up my editor. It is crucial to this project.
+                    <br/>
+                    <div class="center dynamic-scale italicized">
+                        <h4>Renderer Photo Gallery</h4>
+                        <figure>
+                            <img class="dynamic-scale" src="img/pr1_exe.PNG"/>
+                            <figcaption>fig 2. Ts.Gl46 is my OpenGL renderer</figcaption>
+                        </figure>
+                        <figure>
+                            <img class="dynamic-scale" src="img/pr1_rinit.PNG"/>
+                            <figcaption>fig 3. you can see the renderer being loaded from Ts.Gl46 here in main.c (check source?)</figcaption>
+                        </figure>
+                        <figure>
+                            <img class="dynamic-scale" src="img/pr1_prettysky.PNG"/>
+                            <figcaption>fig 4. such a pretty blue sky, thanks to the Ts.Gl46 skybox implementation</figcaption>
+                        </figure>
+                    </div>
+                    Soon enough, the Twoshri renderer will be able to render more than just a single spinning triangle in a pretty blue fantasy world. (Lighting and more!)
+                    <figure class="center">
+                        <img class="dynamic-scale" src="img/pr1_demo1.gif"/>
+                        <figcaption><span class="italicized">fig 5. a video demo! all done in real time. WOW! look at those graphics. so real.</span></figcaption>
+                    </figure>
+                </span>
+                That should about wrap it up for Progress Report #1. I glossed over many many details of course. It's hard to summarize 4 months in one article. If you have any questions, just email or something. Many things are to come. including:
+                <ul>
+                    <li>audio</li>
+                    <li>mesh loading</li>
+                    <li>resource manager</li>
+                    <li>3d scenes</li>
+                </ul>
+                I hope you are excited as I am :) see you in the next report.
+            </div>
+        </div>
+    </body>
+</html>

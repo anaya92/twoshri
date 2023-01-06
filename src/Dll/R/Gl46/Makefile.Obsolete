@@ -1,0 +1,9 @@
+cc = gcc
+
+libDirectory = ./libs
+srcFiles = dllmain.c 2d.c 3d.c _utl/*.c $(libDirectory)/glad/src/*.c
+
+cFlags = -O2 -shared -o R.Gl46 -I../../../../libs/SingleHeader/ -I../../../R/ -I$(libDirectory)/glad/include -lSDL2 -lopengl32
+
+build:
+	$(cc) $(srcFiles) $(cFlags) 

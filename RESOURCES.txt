@@ -1,0 +1,20 @@
+https://www.khronos.org/api/collada
+https://www.models-resource.com/playstation/tailconcerto/model/52455/
+http://www.sgscript.org/
+https://int10h.org/oldschool-pc-fonts/fontlist/font?dos-v_re_jpn24
+https://snowb.org/
+http://www.cse.yorku.ca/~oz/hash.html
+https://stackoverflow.com/questions/647054/porting-stdmap-to-c
+https://www.webdesignerdepot.com/2009/03/operating-system-interface-design-between-1981-2009/
+https://www.reddit.com/r/gamedev/comments/d79o7n/best_3d_model_format_for_a_custom_opengl_game/
+https://opengameart.org/
+
+https://vkguide.dev/
+- has many resources on both vulkan AND engine creation
+- multithreading?
+
+https://youtu.be/-_IspRG548E
+- physics engine creation
+
+RAINBOW ROAD RACING!!!!
+https://asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games.html

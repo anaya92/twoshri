@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'DOS JPN24';
+    src: url('../font/Web437_DOS-V_re_JPN24.woff') format('woff');
+}
+
+html {
+    background: rgb(90,19,142);
+    background: linear-gradient(180deg, rgba(90,19,142,1) 2%, rgba(19,19,126,1) 38%, rgba(2,0,36,1) 100%); 
+
+    font-family: 'Helvetica';
+}
+
+body {
+    margin: auto;
+    margin-bottom: 3em;
+}
+
+h1 {
+    font-size: 48px;
+    font-style: oblique;
+
+    text-align: center;
+
+    border-width: 4px;
+    border-color:black;
+
+    background: linear-gradient(180deg, rgba(244,233,15,1) 2%, rgba(224,118,11,1) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main {
+    width: 75%;
+    max-width: 75em;
+    min-width: 25em;
+
+    margin: auto;
+}
+
+
+.window {
+    outline: 2px solid lightgray;
+    border: 6px double black;
+
+    background-color: lightgray;
+
+    padding: 0.3em;
+
+    font-family: 'DOS JPN24';
+}
+
+.dynamic-scale {
+    max-width: 100%;
+    height: auto;
+}
+
+.center {
+    text-align: center;
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.italicize {
+    font-style: oblique;
+}
+
+.warning {
+    color: red;
+}

@@ -1,0 +1,19 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+    "files.associations": {
+        "stb_image.h": "c",
+        "glad.h": "c",
+        "sdl.h": "c",
+        "gl.h": "c",
+        "mathc.h": "c",
+        "stdio.h": "c",
+        "dae.h": "c",
+        "math.h": "c",
+        "renderer.h": "c",
+        "3d.h": "c",
+        "dlcall.h": "c",
+        "data.h": "c",
+        "cgltf.h": "c"
+    }
+}

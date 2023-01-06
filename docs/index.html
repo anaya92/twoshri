@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TPD [Twoshri Project Directory] ALPHA</title>
+        <link rel="stylesheet" href="styles/dos.css"/>
+        <link rel="icon" type="image/x-icon" href="img/index_favicon.PNG">
+    </head>
+    <body>
+        <span id="header">
+            TPD [Twoshri Project Directory]
+            <span id="datetime" class="align-text-right">?/??/???? 00:00:00 ??</span>
+            <script>
+                var text = document.getElementById('datetime');
+
+                function updateTime() {
+                    let date = new Date();
+
+                    text.innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.toLocaleTimeString();
+                }
+
+                setInterval(updateTime, 1000);
+            </script>
+        </span>
+        <div id="directory">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource Title</th>
+                        <th>Type</th>
+                        <th>Date Added</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="firstelement">
+                        <td>
+                            <a href="???">SOURCE CODE</a>
+                        </td>
+                        <td>LINK</td>
+                        <td>
+                            1/5/2023
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="pr1.html">FASHIONABLY LATE</a>
+                        </td>
+                        <td>P. REPORT</td>
+                        <td>
+                            1/6/2023
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <span id="footer">
+            VER 1.0 ALPHA © पुष २०७९ BS
+            <span class="align-text-right">अनय खड्का</span>
+        </span>
+    </body>
+</html>
