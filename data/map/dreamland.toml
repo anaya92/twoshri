@@ -1,0 +1,9 @@
+[worldmeta]
+name = "dreamland..."
+parent = "anaya"
+birthday = 2022-03-02T00:31:00Z
+last_growth = 2022-03-02T00:31:00Z
+
+[worlddef]
+primary_mesh = "dreamland_primary.gltf"
+

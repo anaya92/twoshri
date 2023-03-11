@@ -14,6 +14,7 @@
         "3d.h": "c",
         "dlcall.h": "c",
         "data.h": "c",
-        "cgltf.h": "c"
+        "cgltf.h": "c",
+        "stdbool.h": "c"
     }
 }
