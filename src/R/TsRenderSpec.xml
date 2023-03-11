@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<ApiSpec>
+    <Metadata>
+        <Name>Twoshri Renderer Spec</Name>
+        <Author>anayae</Author>
+    </Metadata>
+    <Namespace name="renderer" abbr="R">
+        <Function name="Clear"></Function>
+        <Function name="SetFramebufferSize">
+            <Parameter name="width" type="int"/>
+            <Parameter name="height" type="int"/>
+        </Function>
+        <Structure name="ImageSpec">
+            <Field name="data" type="array[u8]"/>
+            <Field name="width" type="int"/>
+            <Field name="height" type="int"/>
+            <Field name="channel count" type="int"/>
+        </Structure>
+    </Namespace>
+    <Namespace name="renderer3d" abbr="R3d">
+        <Function name="Create"></Function>
+        <Function name="Destroy"></Function>
+        <Function name="DefaultState"></Function>
+        <Function name="BeginDraw"></Function>
+        <Function name="EndDraw"></Function>
+        <Structure name="Pipeline"></Structure>
+        <Structure name="Transform">
+            <Field name="position" type="Vector3"/>
+            <Field name="scaling" type="Vector3"/>
+            <Field name="rotate" type="Vector3"/>
+            <Definitor>
+                <Parameter name="p"/>
+                <Parameter name="p"/>
+                <Parameter name="p"/>
+            </Definitor>
+        </Structure>
+        <Function name="SetTransform">
+            <Parameter name="transform" type="@Transform*"/>
+        </Function>
+        <Function name="SetTransformIdentity"></Function>
+        <Structure name="Camera">
+            <Field name="transform" type="@Transform"/>
+            <Field name="up" type="Vector3"/>
+            <Field name="fov" type="float"/>
+            <Definitor>
+                <Parameter name="p"/>
+                <Parameter name="fov"/>
+            </Definitor>
+        </Structure>
+        <Function name="SetCamera">
+            <Parameter name="camera" type="@Camera*"/>
+        </Function>
+        <Function name="SetCameraIdentity"></Function>
+        <Function name="SetCameraDefault"></Function>
+        <Function name="LoadSkybox">
+            <Parameter name="dataArray" type="renderer.ImageSpec"/>
+        </Function>
+        <Function name="DrawSkybox">
+            <Parameter name="enabled" type="bool"/>
+        </Function>
+    </Namespace>
+    <Namespace name="renderer2d" abbr="R2d">
+        
+    </Namespace>
+</ApiSpec>

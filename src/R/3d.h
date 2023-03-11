@@ -9,11 +9,13 @@
 // - use pipelines to extend its functionality dynamically. (sort of like NES mappers,
 //   using custom logic to do stuff)
 
-#pragma once
+#ifndef R_3D_H_
+#define R_3D_H_
 
 #include <stdbool.h>
 #include <HandmadeMath.h>
 
+#include "renderer.h"
 #include "../Dll/dlcall.h"
 
 // allocate/deallocate Renderer3d resources
@@ -110,3 +112,5 @@ void TsImport(R3d_DrawSphere)();
 void TsImport(R3d_DrawCube)();
 void TsImport(R3d_DrawPyramid)();
 void TsImport(R3d_TestPass)();
+
+#endif

@@ -1,7 +1,8 @@
 // TWOSHRI RENDERER FILE
 // (C) ANAYAE 2022
 
-#pragma once
+#ifndef R_RENDERER_H_
+#define R_RENDERER_H_
 
 #include <stdbool.h>
 
@@ -38,3 +39,5 @@ typedef struct
     int w, h;
     int channelcount;
 } R_ImageSpec;
+
+#endif

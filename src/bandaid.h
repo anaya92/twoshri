@@ -30,6 +30,11 @@ void Ba_GenerateTriangleStripTestMesh()
 
 }
 
+void Ba_LoadMap()
+{
+    static const char* filepath = "data/map/dreamland.toml";
+}
+
 // #include <cgltf.h>
 
 // void Ba_GltfTester()

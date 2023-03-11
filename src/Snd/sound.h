@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SND_SOUND_H_
+#define SND_SOUND_H_
 
 #include <stdbool.h>
 
@@ -21,3 +22,5 @@ typedef struct
 } Snd_PlaybackParameters;
 
 extern void Snd_PlayAudio(void* source, void* clip, Snd_PlaybackParameters parameters);
+
+#endif

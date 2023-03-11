@@ -1,6 +1,7 @@
 // TWOSHRI DYNAMIC LIBRARY CALLING CONVENTION/UTILITY LIB (dlcall)
 
-#pragma once
+#ifndef DLL_DLCALL_H_
+#define DLL_DLCALL_H_
 
 #ifdef _MSC_VER
 #define TsExport(symbol) __declspec(dllexport) export_##symbol
@@ -9,3 +10,5 @@
 #endif
 
 #define TsImport(symbol) (*symbol)
+
+#endif

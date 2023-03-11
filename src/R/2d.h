@@ -1,6 +1,9 @@
 // LOUD MOUNTAIN 2D RENDERER
 // (C) ANAYAE JUL. 28 2022
 
+#ifndef R_2D_H_
+#define R_2D_H_
+
 #include "renderer.h"
 
 #include "../Dll/dlcall.h"
@@ -34,3 +37,5 @@ void TsImport(R2d_UnloadBitmapFont)(R2d_BitmapFont* font);
 void TsImport(R2d_BmPrint)(R2d_BitmapFont* font, const char* text);
 
 // ex. R2d_LoadFont("data:font/SYSTEM.fnt")
+
+#endif

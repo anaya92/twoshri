@@ -1,5 +1,4 @@
 #include <renderer.h>
-
 #include <glad/gl.h>
 
 void TsExport(R_Clear)()

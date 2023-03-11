@@ -1,6 +1,7 @@
 // TWOSHRI EVENT CODE
 
-#pragma once
+#ifndef SYS_EVENTS_H_
+#define SYS_EVENTS_H_
 
 #include <stdbool.h>
 
@@ -83,3 +84,5 @@ extern Sys_Gamepad* Sys_ForceGrabGamepad(Sys_EPlayerSlot slot); // ALWAYS return
 extern void Sys_ReleaseGamepad(Sys_EPlayerSlot slot); // cancels pending request and release all backend data
 
 extern struct _gamepadHeader* Sys_GetAllAvailableGamepads(); // UNIMPL
+
+#endif

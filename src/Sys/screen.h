@@ -1,6 +1,7 @@
 // TWOSHRI SCREEN STUFF
 
-#pragma once
+#ifndef SYS_SCREEN_H_
+#define SYS_SCREEN_H_
 
 #include <stdbool.h>
 
@@ -19,3 +20,5 @@ extern void Sys_UpdateScreen();
 
 // screen handles
 extern void* Sys_GetWndHandle();
+
+#endif

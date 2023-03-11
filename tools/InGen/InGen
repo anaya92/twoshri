@@ -1,0 +1,234 @@
+#!/bin/py
+
+# InGen - a tool for generating dynamic library headers from xml schemas for C (and more?)
+
+#cmd line utilities
+class TermFormat:
+    HEADER = '\033[95m'
+    BLUE = '\033[94m'
+    CYAN = '\033[96m'
+    GREEN = '\033[92m'
+    WARNING = '\033[93m'
+    ERROR = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+logo = "MMMMMMMMMMMMMMMMMWKo,.   .:0WMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n\
+MMMMMMMMMMMMMMMMNx.        ;KMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n\
+MMMMMMMMMMMMMMMWd.         'OMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n\
+MMMMMMMMMMMMMMM0'          :XMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n\
+MMMMMMMMMMMMMMMO'         ;0MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n\
+MMMMMMMMMMMMMMMNo.      .oXMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n\
+MMMMMMMMMMMMMWWWNkc;,;cxXWMMMMMMMMMMMMMMMMMMMMMMMMWWWWWWWWWW\n\
+MMMMMMMMMMMNd;;;;;;,,;;c0MMMMMMMMK0NMMMMMMMMMMMMWk:;;;;;;;;c\n\
+MMMMMMMMMMWx.          ;KMMMMMMMWo.dWMMMMMMMMMMMO'         ;\n\
+MMMMMMMMMMK;          .kWMMMMMMM0' .xWMMMMMMMMMXc         .k\n\
+MMMMMMMMMNl           lNMMMMMMMWl   .OWMMMMMMMWx.         lN\n\
+MMMMMMMMMk.          ,0MMMMMMMM0'    ,0MMMMMMM0,         ;KM\n\
+MMMMMMMMX;          .xWMMMMMMNXl      ;KMMMMMNl         .kMM\n\
+MMMMMMWNOl;;;;;;'.  :XMMMMMMMKx:....   :XMMMMk'        .lNMM\n\
+MMMNOo:'...''.',:clo0MMMMN0kdc:;:ol;;;;;dNMMXl'.'co:,'';xNMM\n\
+MXd'   .:x0K0d,   .oXMW0l'. .,:cdOd. .':xXMNl   .ol.    .:KM\n\
+Xc    'kWMMMMMXdlllxXXl.   ,ONMMMMW0;   'OWk.   cK0xo'   .xM\n\
+k.   .xNOollllooooodOo.   ;Okooooooo,    l0;   '0MMMK;   '0M\n\
+O'   .kNd,'''.     'kl    oXxlllllllcccclko.  .dWMMWo   .dWM\n\
+Wk'   ;OXNXKx;    ;OWK;   ;KMMMMMW0l,,;lKO.   :XMMMk.   :XMM\n\
+MMXd;...,;,.. .'cONMMMXx;. 'lOXOl;.  'l0K:   .OMMMK;   .OMMM\n\
+MMNd,,;;;,,,,,;kWMMMMMMMWKkookKxcclx0XNNKdcclxXNNNKdoooOWMMM\n\
+MMk.          ,0MMMMMMMMMMMMMMMMMMMMMXl'''''''''',dNMMMMMMMM\n\
+MK;          .xWMMMMMMMMMMMMMMMMMMMMMWk.         .kMMMMMMMMM\n\
+Wo           cNMMMMMMMMMMMMMMMMMMMMMMMWx.        lNMMMMMMMMM\n\
+O.          '0MMMMMMMMMMMMMMMMMMMMMMMMMWd.      ;KMMMMMMMMMM\n\
+:          .dWMMMMMMMMMMMMMMMMMMMMMMMMMMNo.    .kWMMMMMMMMMM\n\
+;''''''''',oXMMMMMMMMMMMMMMMMMMMMMMMMMMMMNl    lNMMMMMMMMMMM\n\
+NNNNNNNNNNWWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXc  ,0MMMMMMMMMMMM\n\
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK:.xWMMMMMMMMMMMM\n\
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOdKMMMMMMMMMMMMM"
+
+# Argument parsing utilities:
+import sys, os, getopt
+
+os.system('color')
+
+def print_usage():
+    print(f"{TermFormat.HEADER}USAGE:{TermFormat.ENDC} InGen [options] <--schema, -s> <filepath>\n{TermFormat.BOLD}Options:{TermFormat.ENDC}\n\t--help, -h: show this message\n\t--version, -v: show version info\n\t--output, -o <output directory>: select the header output directory")
+
+def fatal_error(msg):
+    print(f"{TermFormat.ERROR}{TermFormat.BOLD}{TermFormat.UNDERLINE}Fatal{TermFormat.ENDC}: {msg}")
+
+def warning(msg):
+    print(f"{TermFormat.WARNING}{TermFormat.BOLD}{TermFormat.UNDERLINE}Warning{TermFormat.ENDC}: {msg}")
+
+if len(sys.argv) < 2:
+    fatal_error("no command arguments")
+    print_usage()
+    exit()
+
+# parameters 
+schema_file = ""
+output_directory = ""
+
+opts, args = getopt.getopt(sys.argv[1:], "hvs:o:", ["help", "version", "schema=", "output="])
+for opt, arg in opts:
+    if opt in ('-h', "--help"):
+        print_usage()
+        exit()
+    elif opt in ('-v', "--version"):
+        print(f"{TermFormat.CYAN}InGen{TermFormat.ENDC} v0.0.1 birthed 3/2/2023")
+        print(f"{TermFormat.BOLD}{TermFormat.CYAN}{logo}{TermFormat.ENDC}")
+        print("(c) anayae 2023")
+        print_usage()
+    elif opt in ('-s', "--schema"):
+        schema_file = arg
+    elif opt in ('-o', "--output"):
+        output_directory = arg
+
+if schema_file == "":
+    fatal_error("no XML schema specified")
+    exit()
+
+# open XML
+import xml.etree.ElementTree as ET, os
+
+if not os.path.isfile(schema_file):
+    fatal_error("schema file does not exist")
+    exit()
+
+doc = ET.parse(schema_file)
+root = doc.getroot()
+
+if root.tag != "ApiSpec":
+    fatal_error("schema file is not properly formatted (root)")
+    exit()
+
+meta = root.find("Metadata")
+if meta is None:
+    fatal_error("where is the schema Metadata???")
+    exit()
+
+api_name = meta.find("Name").text
+api_author = meta.find("Author").text
+print(f"{TermFormat.BOLD}{TermFormat.GREEN}Generating API{TermFormat.ENDC}: {api_name}\n{TermFormat.BOLD}{TermFormat.GREEN}Author{TermFormat.ENDC}: {api_author}")
+
+namespaces = root.findall("Namespace")
+if namespaces is None:
+    fatal_error("no headers in schema?")
+    exit()
+
+class Namespace:
+    def __init__(self, name, abbrievation):
+        self.name = name
+        self.abbr = abbrievation
+
+class Symbol:
+    def serialize():
+        return ""
+
+class SpecFunction(Symbol):
+    def __init__(self, name, parameters, return_value):
+        self.name = name
+        self.parameters = parameters # tuple (name, type)
+        self.return_value = return_value
+    
+    def serialize_parameters(self):
+        if parameters is None:
+            return ""
+        
+        serialized = []
+        for p in self.parameters:
+            serialized.append(f"{p[1]} {p[0]}")
+
+        return serialized
+
+        
+            
+
+class SpecStructure(Symbol):
+    def __init__(self, name, fields):
+        self.name = name
+        self.fields = fields
+
+
+
+namespace_symbol_matrix = []
+for namespace in namespaces:
+    symbols = []
+
+    current_namespace = Namespace(namespace.get("name"), namespace.get("abbr"))
+    if current_namespace.name is None or current_namespace.abbr is None or current_namespace.name == "" or current_namespace.abbr == "":
+        fatal_error("improperly formatted namespace!")
+        exit()
+
+    if list(namespace) is None:
+        warning(f"namespace {current_namespace} has no symbols?")
+    else:
+        for symbol in namespace:
+            if symbol.tag == "Function":
+                function_name = symbol.get("name")
+                if function_name is None or function_name == "":
+                    fatal_error(f"a function is improperly formatted (no name) in namespace {TermFormat.BOLD}{current_namespace.name}{TermFormat.ENDC}")
+                    exit()
+
+                parameters = []
+
+                if symbol.findall("Parameter") is not None:
+                    for parameter in symbol.findall("Parameter"):
+                        if parameter.get("name") is None or parameter.get("name") == "" or parameter.get("type") is None or parameter.get("type") == "":
+                            fatal_error(f"parameter has empty or missing fields in function {TermFormat.BOLD}{function_name}{TermFormat.ENDC}")
+                            exit()
+
+                        parameters.append((parameter.get("name"), parameter.get("type")))
+                else:
+                    parameters = None
+
+                return_value = symbol.find("Return")
+                if return_value is not None:
+                    if return_value.text == "":
+                        fatal_error(f"return type has missing value in function {TermFormat.BOLD}{function_name}{TermFormat.ENDC}")
+                        exit()
+                    return_value = return_value.text
+                else:
+                    return_value = None
+
+                current_symbol = SpecFunction(function_name, parameters, return_value)
+                symbols.append(current_symbol)
+            elif symbol.tag == "Structure":
+                structure_name = symbol.get("name")
+                if structure_name is None or structure_name == "":
+                    fatal_error(f"a function is unnamed in namespace {TermFormat.BOLD}{current_namespace.name}{TermFormat.ENDC}")
+                    exit()
+
+                fields = []
+
+                if symbol.findall("Field") != []:
+                    for field in symbol.findall("Field"):
+                        if field.get("name") is None or field.get("name") == "" or field.get("type") is None or field.get("type") == "":
+                            fatal_error(f"field has empty or missing attributes in structure {TermFormat.BOLD}{structure_name}{TermFormat.ENDC}")
+                            exit()
+
+                        fields.append((field.get("name"), field.get("type")))
+                else:
+                    warning(f"empty structure {TermFormat.BOLD}{structure_name}{TermFormat.ENDC}???")
+                    fields = None
+                
+                current_symbol = SpecStructure(structure_name, fields)
+                symbols.append(current_symbol)
+            else:
+                warning(f"unidentified symbol in namespace {TermFormat.BOLD}{current_namespace.name}{TermFormat.ENDC} \"{symbol.tag}\"")
+
+    namespace_symbol_matrix.append((current_namespace, symbols))
+
+# print(namespace_symbol_matrix)
+
+for pair in namespace_symbol_matrix:
+    # print(f"writing namespace {pair[0].name}")
+    for symbol in pair[1]:
+        if isinstance(symbol, SpecFunction):
+            # print("its a function")
+            c_return = "void"
+            if symbol.return_value is not None:
+                c_return = symbol.return_value
+            
+            print(f"{c_return} {TermFormat.BOLD}{TermFormat.CYAN}{pair[0].abbr}_{symbol.name}{TermFormat.ENDC}(", end="")
+            print(', '.join(symbol.serialize_parameters()), end=");\n")

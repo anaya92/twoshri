@@ -103,6 +103,4 @@ void R_Destroy()
 {
     //dispose
     CLEANUPBACKEND();
-
-    R_UnloadLibrary();
 }

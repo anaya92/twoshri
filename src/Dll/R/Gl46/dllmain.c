@@ -4,7 +4,6 @@
 #include <assert.h>
 
 #include <SDL2/SDL.h> // SDL WILL be exposed in these dlls
-
 #include <glad/gl.h>
 
 #include "../../dlcall.h"
